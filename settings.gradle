@@ -14,3 +14,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Homework2"
 include ':app'
+include ':core-utils'
+include ':feature-products-api'
+include ':feature-products-impl'
+include ':core-network-api'
+include ':core-network-impl'
+include ':feature-pdp-api'
+include ':feature-pdp-impl'
