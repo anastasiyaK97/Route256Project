@@ -48,6 +48,8 @@ dependencies {
     implementation project(":feature-products-impl")
     implementation project(":feature-pdp-api")
     implementation project(":feature-pdp-impl")
+    implementation project(":core-navigation-api")
+    implementation project(":core-navigation-impl")
 
     implementation coreKtx
     implementation navigation.values()
@@ -58,6 +60,10 @@ dependencies {
     implementation lifecycle
     implementation liveData
     implementation glide
+
+    implementation dagger
+    kapt daggerCompiler
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation junit
     androidTestImplementation androidTestJunit

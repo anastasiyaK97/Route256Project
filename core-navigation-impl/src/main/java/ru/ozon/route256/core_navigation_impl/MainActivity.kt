@@ -1,7 +1,8 @@
-package ru.ozon.route256.homework2
+package ru.ozon.route256.core_navigation_impl
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ru.ozon.route256.core_navigation_impl.di.FeatureInjectorProxy
 import ru.ozon.route256.feature_products_impl.presentation.view.ProductsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -13,9 +14,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openProductsScreen() {
+        FeatureInjectorProxy.initFeatureProductsDI()
         val newFragment = ProductsFragment.newInstance()
         supportFragmentManager.beginTransaction()
-            .add(newFragment, ProductsFragment::class.java.simpleName)
+            .replace(R.id.fragmentContainer, newFragment, ProductsFragment::class.java.simpleName)
+            .addToBackStack(null)
             .commit()
     }
 }

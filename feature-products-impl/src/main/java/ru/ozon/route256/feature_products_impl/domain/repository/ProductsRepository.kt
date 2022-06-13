@@ -1,10 +1,10 @@
 package ru.ozon.route256.feature_products_impl.domain.repository
 
-import ru.ozon.route256.feature_products_impl.presentation.view_objects.ProductInList
+import ru.ozon.route256.feature_products_impl.domain.model.ProductInListEntity
 
 interface ProductsRepository {
 
-    fun getProducts(): List<ProductInList>
+    fun getProducts(): List<ProductInListEntity>
 
     fun increaseProductCounter(guid: String)
 }

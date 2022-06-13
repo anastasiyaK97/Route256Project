@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation project(":core-network-api")
+    implementation project(":core-utils")
 
     implementation dagger
     kapt daggerCompiler

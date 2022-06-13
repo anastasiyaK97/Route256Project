@@ -1,7 +1,7 @@
 package ru.ozon.route256.feature_pdp_impl.data.mapper
 
 import ru.ozon.route256.core_network_api.model.ProductDTO
-import ru.ozon.route256.feature_pdp_impl.presentation.view_object.Product
+import ru.ozon.route256.feature_pdp_impl.domain.model.Product
 
 fun ProductDTO.toProduct() : Product =
     Product(

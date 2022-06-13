@@ -1,6 +1,6 @@
 package ru.ozon.route256.feature_pdp_impl.domain.model
 
-data class ProductEntity(
+data class Product(
     val guid: String,
     val name: String,
     val price: String,

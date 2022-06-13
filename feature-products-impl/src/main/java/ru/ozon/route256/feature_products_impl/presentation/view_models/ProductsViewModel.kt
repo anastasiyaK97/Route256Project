@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.ozon.route256.feature_products_impl.domain.interactor.ProductsInteractor
+import ru.ozon.route256.feature_products_impl.presentation.mapper.toProductInList
 import ru.ozon.route256.feature_products_impl.presentation.view_objects.ProductInList
+import javax.inject.Inject
 
-class ProductsViewModel(
+class ProductsViewModel @Inject constructor(
     private val interactor: ProductsInteractor
 ) : ViewModel() {
 
@@ -23,6 +25,6 @@ class ProductsViewModel(
     }
 
     private fun updateCurrentState() {
-        _productLD.value = interactor.getProducts()
+        _productLD.value = interactor.getProducts().map { it.toProductInList() }
     }
 }

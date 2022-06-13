@@ -1,5 +1,6 @@
 package ru.ozon.route256.feature_products_impl.presentation.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.ozon.route256.core_utils.view.viewBinding
 import ru.ozon.route256.core_utils.view_models.viewModelCreator
-import ru.ozon.route256.feature_products_api.navigation.FeatureProductsNavigationApi
+import ru.ozon.route256.feature_products_api.navigation.ProductsNavigationApi
 import ru.ozon.route256.feature_products_impl.R
 import ru.ozon.route256.feature_products_impl.databinding.FragmentProductsBinding
+import ru.ozon.route256.feature_products_impl.di.FeatureProductsComponent
+import ru.ozon.route256.feature_products_impl.domain.interactor.ProductsInteractor
 import ru.ozon.route256.feature_products_impl.presentation.view_models.ProductsViewModel
+import javax.inject.Inject
 
 class ProductsFragment : Fragment() {
 
@@ -18,14 +22,23 @@ class ProductsFragment : Fragment() {
         fun newInstance() = ProductsFragment()
     }
 
-    lateinit var productsNavigation: FeatureProductsNavigationApi
+    @Inject
+    lateinit var productsNavigation: ProductsNavigationApi
+
+    @Inject
+    lateinit var interactor: ProductsInteractor
 
     private val binding: FragmentProductsBinding by viewBinding(FragmentProductsBinding::bind)
     private val viewModel: ProductsViewModel by viewModelCreator {
-        ProductsViewModel()
+        ProductsViewModel(interactor)
     }
 
     private val recyclerAdapter = ProductsAdapter(emptyList(), ::holderClickAction)
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        FeatureProductsComponent.featureProductComponent?.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,17 +52,18 @@ class ProductsFragment : Fragment() {
         viewModel.productLD.observe(viewLifecycleOwner) { recyclerAdapter.submitList(it) }
     }
 
+    override fun onPause() {
+        if(isRemoving) {
+            if (productsNavigation.isFeatureProductsClosed(this)) {
+                FeatureProductsComponent.resetComponent()
+            }
+        }
+        super.onPause()
+    }
+
     private fun holderClickAction(id: String) {
         viewModel.increaseVisitorCounter(productId = id)
-
-        productsNavigation.openProductDetailScreen(productId = id)
-        /*
-
-        val nextFragment = PDPFragment.newInstance(id)
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, nextFragment, null)
-            .addToBackStack(null)
-            .commit()*/
+        productsNavigation.openPDPScreen(fragment = this, productId = id)
     }
 
 }
