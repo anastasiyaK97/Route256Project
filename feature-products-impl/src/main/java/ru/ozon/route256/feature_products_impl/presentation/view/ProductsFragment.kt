@@ -19,6 +19,7 @@ import javax.inject.Inject
 class ProductsFragment : Fragment() {
 
     companion object {
+        const val TAG = "ProductsFragment"
         fun newInstance() = ProductsFragment()
     }
 

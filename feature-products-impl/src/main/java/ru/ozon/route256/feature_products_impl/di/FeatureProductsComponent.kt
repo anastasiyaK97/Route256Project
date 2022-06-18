@@ -8,7 +8,7 @@ import ru.ozon.route256.feature_products_impl.presentation.view.ProductsFragment
 
 @FeatureScope
 @Component(
-    modules = [InteractorModule::class, RepositoryModule::class],
+    modules = [DomainModule::class],
     dependencies = [FeatureProductsDependencies::class]
 )
 interface FeatureProductsComponent {

@@ -23,6 +23,7 @@ import javax.inject.Inject
 class PDPFragment : Fragment() {
 
     companion object {
+        const val TAG = "PDPFragment"
         const val ID_KEY = "ID_KEY"
 
         fun newInstance(id: String): PDPFragment {

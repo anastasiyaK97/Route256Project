@@ -7,7 +7,7 @@ import ru.ozon.route256.feature_pdp_api.navigation.PDPNavigationApi
 import ru.ozon.route256.feature_pdp_impl.presentation.view.PDPFragment
 
 @Component(
-    modules = [InteractorModule::class, RepositoryModule::class],
+    modules = [DomainModule::class],
     dependencies = [FeatureProductDependencies::class]
 )
 @FeatureScope

@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         FeatureInjectorProxy.initFeatureProductsDI()
         val newFragment = ProductsFragment.newInstance()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, newFragment, ProductsFragment::class.java.simpleName)
+            .replace(R.id.fragmentContainer, newFragment, ProductsFragment.TAG)
             .addToBackStack(null)
             .commit()
     }

@@ -7,21 +7,21 @@ import ru.ozon.route256.feature_pdp_impl.presentation.view.PDPFragment
 import ru.ozon.route256.feature_products_api.navigation.ProductsNavigationApi
 import javax.inject.Inject
 
-class ProductsNavigationApiImpl @Inject constructor(): ProductsNavigationApi {
+class ProductsNavigationApiImpl @Inject constructor() : ProductsNavigationApi {
 
     override fun openPDPScreen(fragment: Fragment, productId: String) {
         FeatureInjectorProxy.initFeaturePDPDI()
         val newFragment = PDPFragment.newInstance(productId)
         fragment.activity
             ?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.fragmentContainer, newFragment, PDPFragment::class.java.simpleName)
+            ?.replace(R.id.fragmentContainer, newFragment, PDPFragment.TAG)
             ?.addToBackStack(null)
             ?.commit()
     }
 
     override fun isFeatureProductsClosed(fragment: Fragment): Boolean {
-        return if(fragment.javaClass.simpleName != PDPFragment::class.simpleName) {
-            fragment.activity?.supportFragmentManager?.findFragmentByTag(PDPFragment::class.java.simpleName) == null
+        return if (fragment !is PDPFragment) {
+            fragment.activity?.supportFragmentManager?.findFragmentByTag(PDPFragment.TAG) == null
         } else {
             true
         }

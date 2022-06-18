@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 class PDPNavigationApiImpl @Inject constructor(): PDPNavigationApi {
     override fun isFeatureProductDetailsClosed(fragment: Fragment): Boolean {
-        return if(fragment.javaClass.simpleName != ProductsFragment::class.simpleName) {
-            fragment.activity?.supportFragmentManager?.findFragmentByTag(ProductsFragment::class.java.simpleName) == null
+        return if(fragment !is ProductsFragment) {
+            fragment.activity?.supportFragmentManager?.findFragmentByTag(ProductsFragment.TAG) == null
         } else {
             true
         }
