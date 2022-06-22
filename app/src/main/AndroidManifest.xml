@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Homework2">
         <activity
-            android:name="ru.ozon.route256.core_navigation_impl.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

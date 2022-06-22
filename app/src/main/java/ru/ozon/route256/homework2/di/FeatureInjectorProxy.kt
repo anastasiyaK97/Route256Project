@@ -1,4 +1,4 @@
-package ru.ozon.route256.core_navigation_impl.di
+package ru.ozon.route256.homework2.di
 
 import ru.ozon.route256.core_network_impl.di.DaggerCoreNetworkComponent
 import ru.ozon.route256.feature_pdp_impl.di.DaggerFeaturePDPComponent_FeatureProductDependenciesComponent
@@ -13,6 +13,7 @@ object FeatureInjectorProxy {
             DaggerFeatureProductsComponent_FeatureProductsDependenciesComponent.builder()
                 .networkApi(DaggerCoreNetworkComponent.builder().build())
                 .productsNavigationApi(DaggerNavigationComponent.builder().build().getProductsNavigationApi())
+                .preferencesApi(ApplicationComponent.appComponent)
                 .build()
         )
     }
@@ -22,6 +23,7 @@ object FeatureInjectorProxy {
             DaggerFeaturePDPComponent_FeatureProductDependenciesComponent.builder()
                 .networkApi(DaggerCoreNetworkComponent.builder().build())
                 .pDPNavigationApi(DaggerNavigationComponent.builder().build().getPDPNavigationApi())
+                .preferencesApi(ApplicationComponent.appComponent)
                 .build()
         )
     }

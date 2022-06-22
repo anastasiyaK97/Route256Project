@@ -35,6 +35,7 @@ class ProductsAdapter(
 
     fun submitList(updatedList: List<ProductInList>) {
         list = updatedList
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ProductViewHolder(

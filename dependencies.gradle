@@ -16,7 +16,11 @@ ext {
             navigation       : '2.4.1',
             lifecycle        : '2.3.1',
             glide            : '4.13.0',
-            dagger           : '2.41'
+            dagger           : '2.41',
+            retrofit         : '2.8.1',
+            okhttp           : '3.14.1',
+            moshi            : '1.13.0',
+            worker           : '2.7.1'
     ]
 
     navigation = ['navigarion-fragment': "androidx.navigation:navigation-fragment-ktx:${versions.navigation}",
@@ -48,5 +52,16 @@ ext {
     daggerCompiler = "com.google.dagger:dagger-compiler:${versions.dagger}"
 
     fragment = "androidx.fragment:fragment-ktx:${versions.fragment}"
+
+    retrofit = "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    okhttp = "com.squareup.okhttp3:okhttp-urlconnection:${versions.okhttp}"
+
+    okhttpLoggingInterseptor = "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
+
+    moshi = "com.squareup.moshi:moshi:${versions.moshi}"
+    moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}"
+    moshiRetrofit = "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+
+    worker = "androidx.work:work-runtime:${versions.worker}"
 
 }

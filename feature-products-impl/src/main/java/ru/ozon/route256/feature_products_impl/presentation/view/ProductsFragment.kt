@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import ru.ozon.route256.core_network_api.ProductsApi
 import ru.ozon.route256.core_utils.view.viewBinding
 import ru.ozon.route256.core_utils.view_models.viewModelCreator
+import ru.ozon.route256.core_utils.workers.WorkerUtils
 import ru.ozon.route256.feature_products_api.navigation.ProductsNavigationApi
 import ru.ozon.route256.feature_products_impl.R
 import ru.ozon.route256.feature_products_impl.databinding.FragmentProductsBinding
@@ -29,10 +33,15 @@ class ProductsFragment : Fragment() {
     @Inject
     lateinit var interactor: ProductsInteractor
 
+    @Inject
+    lateinit var test: ProductsApi
+
     private val binding: FragmentProductsBinding by viewBinding(FragmentProductsBinding::bind)
     private val viewModel: ProductsViewModel by viewModelCreator {
         ProductsViewModel(interactor)
     }
+
+    private val workManager = WorkManager.getInstance()
 
     private val recyclerAdapter = ProductsAdapter(emptyList(), ::holderClickAction)
 
@@ -51,15 +60,31 @@ class ProductsFragment : Fragment() {
 
         binding.list.adapter = recyclerAdapter
         viewModel.productLD.observe(viewLifecycleOwner) { recyclerAdapter.submitList(it) }
+
+        listenToWorkerState(WorkerUtils.PRODUCTS_TAG)
     }
 
     override fun onPause() {
-        if(isRemoving) {
+        if (isRemoving) {
             if (productsNavigation.isFeatureProductsClosed(this)) {
                 FeatureProductsComponent.resetComponent()
             }
         }
         super.onPause()
+    }
+
+    private fun listenToWorkerState(tag: String) {
+        workManager.getWorkInfosByTagLiveData(tag)
+            .observe(viewLifecycleOwner) { workInfoList ->
+                if (workInfoList.isEmpty()) return@observe
+                if (workInfoList.first().state == WorkInfo.State.SUCCEEDED) {
+                    updateState()
+                }
+            }
+    }
+
+    private fun updateState() {
+        viewModel.updateCurrentState()
     }
 
     private fun holderClickAction(id: String) {

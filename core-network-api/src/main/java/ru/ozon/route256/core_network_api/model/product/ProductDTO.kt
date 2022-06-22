@@ -1,5 +1,8 @@
-package ru.ozon.route256.core_network_api.model
+package ru.ozon.route256.core_network_api.model.product
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class ProductDTO(
     val guid: String,
     val name: String,

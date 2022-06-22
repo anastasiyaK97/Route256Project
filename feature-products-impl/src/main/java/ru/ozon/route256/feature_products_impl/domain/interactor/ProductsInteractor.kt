@@ -6,5 +6,7 @@ interface ProductsInteractor {
 
     fun getProducts(): List<ProductInListEntity>
 
+    fun planProductsRequest()
+
     fun increaseProductCounter(guid: String)
 }

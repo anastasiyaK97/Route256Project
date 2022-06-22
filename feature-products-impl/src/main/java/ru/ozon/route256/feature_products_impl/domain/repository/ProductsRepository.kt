@@ -4,7 +4,9 @@ import ru.ozon.route256.feature_products_impl.domain.model.ProductInListEntity
 
 interface ProductsRepository {
 
-    fun getProducts(): List<ProductInListEntity>
+    fun getProductsFromCache(): List<ProductInListEntity>
 
-    fun increaseProductCounter(guid: String)
+    fun saveProductsInCache(productsJson: String)
+
+    fun updateProductsInCache(productslist: List<ProductInListEntity>)
 }

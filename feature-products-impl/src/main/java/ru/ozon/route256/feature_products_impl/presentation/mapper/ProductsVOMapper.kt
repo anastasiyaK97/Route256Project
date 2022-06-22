@@ -12,5 +12,5 @@ fun ProductInListEntity.toProductInList() : ProductInList =
         rating = rating,
         isFavorite = isFavorite,
         isInCart = isInCart,
-        counter = counter
+        counter = counter ?: 0
     )

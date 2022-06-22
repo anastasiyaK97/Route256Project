@@ -36,6 +36,13 @@ dependencies {
     implementation project(":core-network-api")
     implementation project(":core-utils")
 
+    implementation retrofit
+    implementation okhttp
+    implementation okhttpLoggingInterseptor
+    implementation moshi
+    kapt moshiCodegen
+    implementation moshiRetrofit
+
     implementation dagger
     kapt daggerCompiler
 }

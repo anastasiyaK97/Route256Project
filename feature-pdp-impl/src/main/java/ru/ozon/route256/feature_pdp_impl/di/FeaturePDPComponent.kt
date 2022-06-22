@@ -2,6 +2,7 @@ package ru.ozon.route256.feature_pdp_impl.di
 
 import dagger.Component
 import ru.ozon.route256.core_network_api.NetworkApi
+import ru.ozon.route256.core_prefs.api.PreferencesApi
 import ru.ozon.route256.core_utils.di.FeatureScope
 import ru.ozon.route256.feature_pdp_api.navigation.PDPNavigationApi
 import ru.ozon.route256.feature_pdp_impl.presentation.view.PDPFragment
@@ -45,6 +46,6 @@ interface FeaturePDPComponent {
     fun inject(fragment: PDPFragment)
 
     @FeatureScope
-    @Component(dependencies = [NetworkApi::class, PDPNavigationApi::class])
+    @Component(dependencies = [NetworkApi::class, PDPNavigationApi::class, PreferencesApi::class])
     interface FeatureProductDependenciesComponent : FeatureProductDependencies
 }

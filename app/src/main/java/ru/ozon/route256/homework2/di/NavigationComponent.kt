@@ -1,4 +1,4 @@
-package ru.ozon.route256.core_navigation_impl.di
+package ru.ozon.route256.homework2.di
 
 import dagger.Component
 import ru.ozon.route256.core_navigation_api.NavigationApi

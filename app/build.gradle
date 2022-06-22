@@ -50,6 +50,7 @@ dependencies {
     implementation project(":feature-pdp-impl")
     implementation project(":core-navigation-api")
     implementation project(":core-navigation-impl")
+    implementation project(":core-prefs")
 
     implementation coreKtx
     implementation navigation.values()

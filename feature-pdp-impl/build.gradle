@@ -40,6 +40,7 @@ dependencies {
     implementation project(":core-network-api")
     implementation project(":core-utils")
     implementation project(":feature-pdp-api")
+    implementation project(":core-prefs")
 
     implementation coreKtx
     implementation navigation.values()
@@ -50,6 +51,9 @@ dependencies {
     implementation lifecycle
     implementation liveData
     implementation glide
+
+    implementation moshi
+    kapt moshiCodegen
 
     implementation dagger
     kapt daggerCompiler

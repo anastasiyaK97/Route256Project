@@ -1,5 +1,8 @@
 package ru.ozon.route256.feature_products_impl.domain.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class ProductInListEntity(
     val guid: String,
     val image: String,
@@ -8,5 +11,5 @@ data class ProductInListEntity(
     val rating: Double,
     val isFavorite: Boolean,
     val isInCart: Boolean,
-    val counter: Int
+    val counter: Int?
 )

@@ -1,4 +1,4 @@
-package ru.ozon.route256.core_navigation_impl.navigation
+package ru.ozon.route256.homework2
 
 import androidx.fragment.app.Fragment
 import ru.ozon.route256.feature_pdp_api.navigation.PDPNavigationApi

@@ -16,7 +16,7 @@ class ProductsViewModel @Inject constructor(
     val productLD: LiveData<List<ProductInList>> = _productLD
 
     init {
-        updateCurrentState()
+        interactor.planProductsRequest()
     }
 
     fun increaseVisitorCounter(productId: String) {
@@ -24,7 +24,7 @@ class ProductsViewModel @Inject constructor(
         updateCurrentState()
     }
 
-    private fun updateCurrentState() {
+    fun updateCurrentState() {
         _productLD.value = interactor.getProducts().map { it.toProductInList() }
     }
 }
