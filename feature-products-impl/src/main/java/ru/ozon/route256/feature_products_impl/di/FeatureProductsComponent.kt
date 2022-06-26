@@ -2,6 +2,7 @@ package ru.ozon.route256.feature_products_impl.di
 
 import dagger.Component
 import ru.ozon.route256.core_network_api.NetworkApi
+import ru.ozon.route256.core_network_api.WorkManagerDeps
 import ru.ozon.route256.core_prefs.api.PreferencesApi
 import ru.ozon.route256.core_utils.di.FeatureScope
 import ru.ozon.route256.feature_products_api.navigation.ProductsNavigationApi
@@ -50,6 +51,11 @@ interface FeatureProductsComponent {
     fun inject(worker: GetDetailedProductsWorker)
 
     @FeatureScope
-    @Component(dependencies = [NetworkApi::class, ProductsNavigationApi::class, PreferencesApi::class])
+    @Component(dependencies = [
+        NetworkApi::class,
+        ProductsNavigationApi::class,
+        PreferencesApi::class,
+        WorkManagerDeps::class
+    ])
     interface FeatureProductsDependenciesComponent : FeatureProductsDependencies
 }

@@ -14,6 +14,7 @@ object FeatureInjectorProxy {
                 .networkApi(DaggerCoreNetworkComponent.builder().build())
                 .productsNavigationApi(DaggerNavigationComponent.builder().build().getProductsNavigationApi())
                 .preferencesApi(ApplicationComponent.appComponent)
+                .workManagerDeps(ApplicationComponent.appComponent)
                 .build()
         )
     }

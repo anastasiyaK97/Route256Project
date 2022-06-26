@@ -9,4 +9,6 @@ interface ProductsRepository {
     fun saveProductsInCache(productsJson: String)
 
     fun updateProductsInCache(productslist: List<ProductInListEntity>)
+
+    fun requestProducts()
 }

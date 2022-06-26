@@ -33,6 +33,8 @@ android {
 }
 
 dependencies {
+    implementation worker
+    
     implementation retrofit
     implementation moshi
     kapt moshiCodegen

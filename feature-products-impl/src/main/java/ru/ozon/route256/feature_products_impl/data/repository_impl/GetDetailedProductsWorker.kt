@@ -18,6 +18,10 @@ class GetDetailedProductsWorker(
     workerParameters: WorkerParameters
 ) : Worker(context, workerParameters) {
 
+    companion object {
+        const val PRODUCTS_DETAILED_TAG = "TAG_PRODUCTS_DETAILED"
+    }
+
     @Inject
     lateinit var productsApi: ProductsApi
 
@@ -28,18 +32,20 @@ class GetDetailedProductsWorker(
     @ProductsDetailsPrefs
     lateinit var prefs: SharedPreferences
 
-    override fun doWork(): Result {
+    init {
         FeatureProductsComponent.featureProductComponent?.inject(this)
+    }
 
+    override fun doWork(): Result {
         val response = productsApi.getDetailedProducts().execute()
         return if (response.isSuccessful) {
             val json = moshi.getListAdapter<ProductDTO>().toJson(response.body())
             prefs.edit()
-                .putString(CacheKeys.PRODUCTS_DETAIL.key, json)
+                .putString(CacheKeys.PRODUCTS_DETAIL.name, json)
                 .apply()
             Result.success()
         } else {
-            Result.retry()
+            Result.failure()
         }
     }
 

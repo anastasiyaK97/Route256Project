@@ -1,23 +1,24 @@
 package ru.ozon.route256.feature_products_impl.data.repository_impl
 
 import android.content.SharedPreferences
+import androidx.work.WorkManager
 import com.squareup.moshi.Moshi
-import ru.ozon.route256.core_network_api.ProductsApi
 import ru.ozon.route256.core_prefs.CacheKeys
 import ru.ozon.route256.core_prefs.di.ProductsPrefs
 import ru.ozon.route256.core_utils.extensions.getListAdapter
+import ru.ozon.route256.core_utils.workers.WorkerUtils
 import ru.ozon.route256.feature_products_impl.domain.model.ProductInListEntity
 import ru.ozon.route256.feature_products_impl.domain.repository.ProductsRepository
 import javax.inject.Inject
 
 class ProductsRepositoryImpl @Inject constructor(
-    private val productsApi: ProductsApi,
     @ProductsPrefs private val localSource: SharedPreferences,
-    private val moshi: Moshi
+    private val moshi: Moshi,
+    private val workManager: WorkManager
 ) : ProductsRepository {
 
     override fun getProductsFromCache(): List<ProductInListEntity> {
-        val json = localSource.getString(CacheKeys.PRODUCTS.key, "")
+        val json = localSource.getString(CacheKeys.PRODUCTS.name, "")
         if (json.isNullOrEmpty()) return emptyList()
 
         val list = moshi.getListAdapter<ProductInListEntity>().fromJson(json)
@@ -26,7 +27,7 @@ class ProductsRepositoryImpl @Inject constructor(
 
     override fun saveProductsInCache(productsJson: String) {
         localSource.edit()
-            .putString(CacheKeys.PRODUCTS.key, productsJson)
+            .putString(CacheKeys.PRODUCTS.name, productsJson)
             .commit()
     }
 
@@ -35,5 +36,20 @@ class ProductsRepositoryImpl @Inject constructor(
             .toJson(productslist)
     )
 
+    override fun requestProducts() {
+        val productsRequest = WorkerUtils.getOneTimeRequest(
+            clazz = GetProductsWorker::class.java,
+            tag = GetProductsWorker.PRODUCTS_TAG
+        )
+        val detailedProductsRequest = WorkerUtils.getOneTimeRequest(
+            clazz = GetDetailedProductsWorker::class.java,
+            tag = GetDetailedProductsWorker.PRODUCTS_DETAILED_TAG
+        )
+
+        workManager
+            .beginWith(productsRequest)
+            .then(detailedProductsRequest)
+            .enqueue()
+    }
 
 }

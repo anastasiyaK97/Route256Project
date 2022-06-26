@@ -19,6 +19,10 @@ class GetProductsWorker(
     workerParameters: WorkerParameters
 ) : Worker(context, workerParameters) {
 
+    companion object {
+        const val PRODUCTS_TAG = "TAG_PRODUCTS"
+    }
+
     @Inject
     lateinit var productsApi: ProductsApi
 
@@ -28,8 +32,11 @@ class GetProductsWorker(
     @Inject
     lateinit var moshi: Moshi
 
-    override fun doWork(): Result {
+    init {
         FeatureProductsComponent.featureProductComponent?.inject(this)
+    }
+
+    override fun doWork(): Result {
         val response = productsApi.getProducts().execute()
 
         return if (response.isSuccessful) {
@@ -40,7 +47,7 @@ class GetProductsWorker(
             repository.saveProductsInCache(json)
             Result.success()
         } else {
-            Result.retry()
+            Result.failure()
         }
     }
 

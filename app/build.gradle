@@ -62,6 +62,8 @@ dependencies {
     implementation liveData
     implementation glide
 
+    implementation worker
+
     implementation dagger
     kapt daggerCompiler
 

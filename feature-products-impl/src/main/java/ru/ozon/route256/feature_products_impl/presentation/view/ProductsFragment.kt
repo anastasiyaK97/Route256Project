@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import ru.ozon.route256.core_network_api.ProductsApi
 import ru.ozon.route256.core_utils.view.viewBinding
 import ru.ozon.route256.core_utils.view_models.viewModelCreator
-import ru.ozon.route256.core_utils.workers.WorkerUtils
 import ru.ozon.route256.feature_products_api.navigation.ProductsNavigationApi
 import ru.ozon.route256.feature_products_impl.R
+import ru.ozon.route256.feature_products_impl.data.repository_impl.GetProductsWorker
 import ru.ozon.route256.feature_products_impl.databinding.FragmentProductsBinding
 import ru.ozon.route256.feature_products_impl.di.FeatureProductsComponent
 import ru.ozon.route256.feature_products_impl.domain.interactor.ProductsInteractor
@@ -34,14 +32,12 @@ class ProductsFragment : Fragment() {
     lateinit var interactor: ProductsInteractor
 
     @Inject
-    lateinit var test: ProductsApi
+    lateinit var workManager: WorkManager
 
     private val binding: FragmentProductsBinding by viewBinding(FragmentProductsBinding::bind)
     private val viewModel: ProductsViewModel by viewModelCreator {
         ProductsViewModel(interactor)
     }
-
-    private val workManager = WorkManager.getInstance()
 
     private val recyclerAdapter = ProductsAdapter(emptyList(), ::holderClickAction)
 
@@ -61,7 +57,7 @@ class ProductsFragment : Fragment() {
         binding.list.adapter = recyclerAdapter
         viewModel.productLD.observe(viewLifecycleOwner) { recyclerAdapter.submitList(it) }
 
-        listenToWorkerState(WorkerUtils.PRODUCTS_TAG)
+        listenToWorkerState(GetProductsWorker.PRODUCTS_TAG)
     }
 
     override fun onPause() {
@@ -77,7 +73,7 @@ class ProductsFragment : Fragment() {
         workManager.getWorkInfosByTagLiveData(tag)
             .observe(viewLifecycleOwner) { workInfoList ->
                 if (workInfoList.isEmpty()) return@observe
-                if (workInfoList.first().state == WorkInfo.State.SUCCEEDED) {
+                if (workInfoList.first().state.isFinished) {
                     updateState()
                 }
             }
