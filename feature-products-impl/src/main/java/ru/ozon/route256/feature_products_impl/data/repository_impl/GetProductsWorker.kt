@@ -1,12 +1,11 @@
 package ru.ozon.route256.feature_products_impl.data.repository_impl
 
 import android.content.Context
-import androidx.work.Worker
+import androidx.work.RxWorker
 import androidx.work.WorkerParameters
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
+import io.reactivex.Single
 import ru.ozon.route256.core_network_api.ProductsApi
-import ru.ozon.route256.core_network_api.model.product.ProductInListDTO
 import ru.ozon.route256.core_utils.extensions.getListAdapter
 import ru.ozon.route256.feature_products_impl.data.mapper.toProductInListEntity
 import ru.ozon.route256.feature_products_impl.di.FeatureProductsComponent
@@ -17,7 +16,7 @@ import javax.inject.Inject
 class GetProductsWorker(
     context: Context,
     workerParameters: WorkerParameters
-) : Worker(context, workerParameters) {
+) : RxWorker(context, workerParameters) {
 
     companion object {
         const val PRODUCTS_TAG = "TAG_PRODUCTS"
@@ -36,19 +35,16 @@ class GetProductsWorker(
         FeatureProductsComponent.featureProductComponent?.inject(this)
     }
 
-    override fun doWork(): Result {
-        val response = productsApi.getProducts().execute()
-
-        return if (response.isSuccessful) {
-            val json = moshi.getListAdapter<ProductInListEntity>().toJson(
-                response.body()?.map { it.toProductInListEntity() }
-            )
-
-            repository.saveProductsInCache(json)
-            Result.success()
-        } else {
-            Result.failure()
-        }
+    override fun createWork(): Single<Result> {
+        return productsApi.getProducts()
+            .map { response ->
+                val json = moshi.getListAdapter<ProductInListEntity>().toJson(
+                    response.map { it.toProductInListEntity() }
+                )
+                repository.saveProductsInCache(json)
+                Result.success()
+            }
+            .onErrorReturn { Result.failure() }
     }
 
 }

@@ -22,6 +22,7 @@ class ProductsFragment : Fragment() {
 
     companion object {
         const val TAG = "ProductsFragment"
+
         fun newInstance() = ProductsFragment()
     }
 
@@ -56,6 +57,7 @@ class ProductsFragment : Fragment() {
 
         binding.list.adapter = recyclerAdapter
         viewModel.productLD.observe(viewLifecycleOwner) { recyclerAdapter.submitList(it) }
+        lifecycle.addObserver(viewModel)
 
         listenToWorkerState(GetProductsWorker.PRODUCTS_TAG)
     }
