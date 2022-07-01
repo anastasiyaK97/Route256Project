@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Homework2</string>
+    <string name="common_connection_exception_message">Нет соединения с сетью 😔\nПроверьте соединение с сетью</string>
 </resources>

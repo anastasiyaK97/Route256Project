@@ -6,6 +6,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import ru.ozon.route256.core_network_api.ProductsApi
 import ru.ozon.route256.core_network_impl.BuildConfig
@@ -54,6 +55,7 @@ class CoreNetworkModule {
         .baseUrl(apiUrl)
         .client(client)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
 
     @Singleton

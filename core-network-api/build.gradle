@@ -36,6 +36,8 @@ dependencies {
     implementation worker
     
     implementation retrofit
+    implementation rxJava2
+
     implementation moshi
     kapt moshiCodegen
 }

@@ -43,6 +43,9 @@ dependencies {
     kapt moshiCodegen
     implementation moshiRetrofit
 
+    implementation rxJava2
+    implementation rxRetrofit
+
     implementation dagger
     kapt daggerCompiler
 }

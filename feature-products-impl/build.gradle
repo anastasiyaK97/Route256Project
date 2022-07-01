@@ -55,6 +55,8 @@ dependencies {
 
     implementation retrofit
     implementation worker
+    implementation rxWorker
+    implementation rxKotlin
     implementation moshi
     kapt moshiCodegen
 

@@ -20,7 +20,10 @@ ext {
             retrofit         : '2.8.1',
             okhttp           : '3.14.1',
             moshi            : '1.13.0',
-            worker           : '2.7.1'
+            worker           : '2.7.1',
+            rxJava2          : '2.2.21',
+            rxAndroid        : '2.1.1',
+            rxKotlin         : '2.4.0'
     ]
 
     navigation = ['navigarion-fragment': "androidx.navigation:navigation-fragment-ktx:${versions.navigation}",
@@ -63,5 +66,10 @@ ext {
     moshiRetrofit = "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
 
     worker = "androidx.work:work-runtime:${versions.worker}"
+    rxWorker = "androidx.work:work-rxjava2:${versions.worker}"
 
+    rxJava2 = "io.reactivex.rxjava2:rxjava:${versions.rxJava2}"
+    rxKotlin = "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}"
+    rxRetrofit = "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+    rxAndroid = "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
 }
