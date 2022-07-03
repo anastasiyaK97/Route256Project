@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="84dp"
+    android:layout_height="124dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="16dp"
     app:cardCornerRadius="8dp"
@@ -55,7 +55,6 @@
             android:layout_marginStart="16dp"
             android:isIndicator="true"
             android:rating="3"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/productIV"
             app:layout_constraintTop_toBottomOf="@id/priceTV" />
 
@@ -71,6 +70,18 @@
             app:layout_constraintBottom_toBottomOf="@id/ratingView"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="10"/>
+
+        <ru.ozon.route256.feature_products_impl.presentation.view.CartButton
+            android:id="@+id/cart_button"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:foreground="?selectableItemBackground"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintStart_toEndOf="@id/productIV"
+            app:layout_constraintTop_toBottomOf="@id/ratingView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
         
     </androidx.constraintlayout.widget.ConstraintLayout>
 

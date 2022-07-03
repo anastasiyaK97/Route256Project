@@ -23,7 +23,8 @@ ext {
             worker           : '2.7.1',
             rxJava2          : '2.2.21',
             rxAndroid        : '2.1.1',
-            rxKotlin         : '2.4.0'
+            rxKotlin         : '2.4.0',
+            gifDrawable      : '1.2.23'
     ]
 
     navigation = ['navigarion-fragment': "androidx.navigation:navigation-fragment-ktx:${versions.navigation}",
@@ -72,4 +73,6 @@ ext {
     rxKotlin = "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}"
     rxRetrofit = "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
     rxAndroid = "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
+
+    gifDrawable = "pl.droidsonroids.gif:android-gif-drawable:${versions.gifDrawable}"
 }

@@ -10,9 +10,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import ru.ozon.route256.core_utils.extensions.replace
 import ru.ozon.route256.feature_products_impl.domain.interactor.ProductsInteractor
-import ru.ozon.route256.feature_products_impl.presentation.mapper.toProductInList
-import ru.ozon.route256.feature_products_impl.presentation.view_objects.ProductInList
+import ru.ozon.route256.feature_products_impl.presentation.mapper.toProductsItemList
+import ru.ozon.route256.feature_products_impl.presentation.view_objects.ProductsListItem
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -24,8 +25,8 @@ class ProductsViewModel @Inject constructor(
         private const val UPDATING_INTERVAL_MIN = 5L
     }
 
-    private val _productLD = MutableLiveData<List<ProductInList>>()
-    val productLD: LiveData<List<ProductInList>> = _productLD
+    private val _productLD = MutableLiveData<List<ProductsListItem>>()
+    val productLD: LiveData<List<ProductsListItem>> = _productLD
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -39,7 +40,7 @@ class ProductsViewModel @Inject constructor(
     }
 
     fun updateCurrentState() {
-        _productLD.value = interactor.getProducts().map { it.toProductInList() }
+        _productLD.value = interactor.getProducts().toProductsItemList()
     }
 
     override fun onStart(owner: LifecycleOwner) {
@@ -53,6 +54,41 @@ class ProductsViewModel @Inject constructor(
 
     override fun onStop(owner: LifecycleOwner) {
         compositeDisposable.clear()
+    }
+
+    fun addProductToCart(id: String) {
+        updateProductState(id = id, isLoading = true)
+        compositeDisposable += Observable
+            .interval(5L, TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.io())
+            .subscribeBy(
+                onNext = {
+                    updateProductState(id = id, isLoading = false, isInCart = true)
+                },
+                onError = {
+                    updateProductState(id = id, isLoading = false, isInCart = false)
+                }
+            )
+    }
+
+    private fun updateProductState(
+        id: String,
+        isLoading: Boolean = false,
+        isInCart: Boolean = false
+    ) {
+        _productLD.value?.let { items ->
+            val product = items
+                .find { it is ProductsListItem.ProductInList && it.guid == id }
+                    as? ProductsListItem.ProductInList
+                ?: return
+            _productLD.postValue(
+                items.toMutableList()
+                    .replace(
+                        oldItem = product,
+                        newItem = product.copy(isLoading = isLoading, isInCart = isInCart)
+                    )
+            )
+        }
     }
 
 }

@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="grey_error_placeholder">#CACACA</color>
+    <color name="section_background">#5084D4DF</color>
+    <color name="button_default">#12B052</color>
+    <color name="button_done">#0351CE</color>
 </resources>

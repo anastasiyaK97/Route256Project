@@ -52,6 +52,7 @@ dependencies {
     implementation lifecycle
     implementation liveData
     implementation glide
+    implementation gifDrawable
 
     implementation retrofit
     implementation worker

@@ -40,7 +40,11 @@ class ProductsFragment : Fragment() {
         ProductsViewModel(interactor)
     }
 
-    private val recyclerAdapter = ProductsAdapter(emptyList(), ::holderClickAction)
+    private val recyclerAdapter = ProductsAdapter(
+        list = emptyList(),
+        clickAction = ::holderClickAction,
+        addToCartAction = ::addToCartAction
+    )
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -88,6 +92,10 @@ class ProductsFragment : Fragment() {
     private fun holderClickAction(id: String) {
         viewModel.increaseVisitorCounter(productId = id)
         productsNavigation.openPDPScreen(fragment = this, productId = id)
+    }
+
+    private fun addToCartAction(id: String) {
+        viewModel.addProductToCart(id)
     }
 
 }
