@@ -7,7 +7,7 @@ class SectionViewHolder(
     private val binding: ProductsSectionItemBinding
 ) : BaseListViewHolder<ProductsListItem.SectionListItem>(binding) {
 
-    override fun bindItem(item: ProductsListItem.SectionListItem) {
+    override fun bindItem(item: ProductsListItem.SectionListItem, payloads: MutableList<Any>?) {
         binding.title.setText(item.titleRes)
     }
 }

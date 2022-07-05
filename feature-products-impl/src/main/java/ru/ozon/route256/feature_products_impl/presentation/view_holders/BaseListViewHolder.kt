@@ -10,12 +10,12 @@ abstract class BaseListViewHolder<T>(
         where T : ProductsListItem {
 
     @Suppress("UNCHECKED_CAST")
-    fun bind(item: ProductsListItem) {
+    fun bind(item: ProductsListItem, payloads: MutableList<Any>? = null) {
         (item as? T)?.let {
-            bindItem(it)
+            bindItem(it, payloads)
         }
 
     }
 
-    protected abstract fun bindItem(item: T)
+    protected abstract fun bindItem(item: T, payloads: MutableList<Any>?)
 }

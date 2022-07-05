@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import ru.ozon.route256.feature_products_impl.databinding.ProductListItemBinding
 import ru.ozon.route256.feature_products_impl.databinding.ProductsSectionItemBinding
-import ru.ozon.route256.feature_products_impl.presentation.view.ProductsAdapter.Companion.PRODUCT_VIEW_TYPE
-import ru.ozon.route256.feature_products_impl.presentation.view.ProductsAdapter.Companion.SECTION_VIEW_TYPE
+import ru.ozon.route256.feature_products_impl.presentation.view.list.ProductsAdapter.Companion.PRODUCT_VIEW_TYPE
+import ru.ozon.route256.feature_products_impl.presentation.view.list.ProductsAdapter.Companion.SECTION_VIEW_TYPE
 
 object ViewHolderFactory {
 

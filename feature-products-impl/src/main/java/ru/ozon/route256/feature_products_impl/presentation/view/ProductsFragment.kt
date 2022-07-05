@@ -15,6 +15,7 @@ import ru.ozon.route256.feature_products_impl.data.repository_impl.GetProductsWo
 import ru.ozon.route256.feature_products_impl.databinding.FragmentProductsBinding
 import ru.ozon.route256.feature_products_impl.di.FeatureProductsComponent
 import ru.ozon.route256.feature_products_impl.domain.interactor.ProductsInteractor
+import ru.ozon.route256.feature_products_impl.presentation.view.list.ProductsAdapter
 import ru.ozon.route256.feature_products_impl.presentation.view_models.ProductsViewModel
 import javax.inject.Inject
 
@@ -41,7 +42,6 @@ class ProductsFragment : Fragment() {
     }
 
     private val recyclerAdapter = ProductsAdapter(
-        list = emptyList(),
         clickAction = ::holderClickAction,
         addToCartAction = ::addToCartAction
     )
