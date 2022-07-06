@@ -7,7 +7,7 @@ import ru.ozon.route256.feature_products_impl.presentation.view_objects.Products
 fun ProductInListEntity.toProductInList(): ProductsListItem.ProductInList =
     ProductsListItem.ProductInList(
         guid = guid,
-        image = image,
+        images = image,
         name = name,
         price = price,
         rating = rating,

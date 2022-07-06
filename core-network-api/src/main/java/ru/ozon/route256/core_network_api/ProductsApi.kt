@@ -7,7 +7,7 @@ import ru.ozon.route256.core_network_api.model.product.ProductInListDTO
 
 interface ProductsApi {
 
-    @GET("/v3/50afcd4b-d81e-473e-827c-1b6cae1ea1b2/")
+    @GET("/v3/ee6876a1-8c02-45aa-bde4-b91817a8b210/")
     fun getProducts(): Single<List<ProductInListDTO>>
 
     @GET("/v3/8c374376-e94e-4c5f-aa30-a9eddb0d7d0a/")

@@ -2,6 +2,8 @@ package ru.ozon.route256.feature_products_impl.presentation.view.list
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import ru.ozon.route256.feature_products_impl.presentation.view.list.ImagesAdapter.Companion.IMAGE_VIEW_TYPE
 import ru.ozon.route256.feature_products_impl.presentation.view_holders.AddToCartAction
 import ru.ozon.route256.feature_products_impl.presentation.view_holders.BaseListViewHolder
 import ru.ozon.route256.feature_products_impl.presentation.view_holders.ProductClickAction
@@ -18,8 +20,18 @@ class ProductsAdapter(
         const val SECTION_VIEW_TYPE: Int = 20
     }
 
+    private val imagesSharedViewPool = RecyclerView.RecycledViewPool().apply {
+        this.setMaxRecycledViews(IMAGE_VIEW_TYPE, 20)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolderFactory.create(parent, viewType, clickAction, addToCartAction)
+        ViewHolderFactory.create(
+            parent = parent,
+            viewType = viewType,
+            clickAction = clickAction,
+            addToCartAction = addToCartAction,
+            imagesRecyclerViewPool = imagesSharedViewPool
+        )
 
     override fun onBindViewHolder(
         holder: BaseListViewHolder<*>,

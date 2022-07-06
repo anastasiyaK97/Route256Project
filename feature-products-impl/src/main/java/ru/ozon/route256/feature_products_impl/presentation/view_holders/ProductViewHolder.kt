@@ -1,11 +1,12 @@
 package ru.ozon.route256.feature_products_impl.presentation.view_holders
 
-import com.bumptech.glide.Glide
-import ru.ozon.route256.core_utils.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ru.ozon.route256.core_utils.extensions.withCurrency
 import ru.ozon.route256.core_utils.view.setTextOrGone
 import ru.ozon.route256.feature_products_impl.databinding.ProductListItemBinding
 import ru.ozon.route256.feature_products_impl.presentation.view.CartButton
+import ru.ozon.route256.feature_products_impl.presentation.view.list.ImagesAdapter
 import ru.ozon.route256.feature_products_impl.presentation.view.list.ProductPayload
 import ru.ozon.route256.feature_products_impl.presentation.view_objects.ProductsListItem
 
@@ -15,17 +16,29 @@ typealias AddToCartAction = (String) -> Unit
 class ProductViewHolder(
     private val binding: ProductListItemBinding,
     clickAction: ProductClickAction,
-    addToCartAction: AddToCartAction
+    addToCartAction: AddToCartAction,
+    sharedViewPool: RecyclerView.RecycledViewPool
 ) : BaseListViewHolder<ProductsListItem.ProductInList>(binding) {
 
+    private val adapter = ImagesAdapter()
     private var product: ProductsListItem.ProductInList? = null
 
     init {
-        binding.root.setOnClickListener {
-            product?.let { clickAction.invoke(it.guid) }
-        }
-        binding.cartButton.setOnClickListener {
-            product?.let { addToCartAction.invoke(it.guid) }
+        with(binding) {
+            root.setOnClickListener {
+                product?.let { clickAction.invoke(it.guid) }
+            }
+            cartButton.setOnClickListener {
+                product?.let { addToCartAction.invoke(it.guid) }
+            }
+
+            productIV.adapter = adapter
+            productIV.layoutManager = LinearLayoutManager(
+                binding.root.context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            productIV.setRecycledViewPool(sharedViewPool)
         }
     }
 
@@ -49,10 +62,11 @@ class ProductViewHolder(
             visitorCounter.setTextOrGone(item.counter.takeIf { it > 0 }?.toString())
             updateButton(item.isLoading, item.isInCart)
 
-            Glide.with(itemView.context)
-                .load(item.image)
-                .error(R.color.grey_error_placeholder)
-                .into(productIV)
+            adapter.submitList(item.images)
+            /*Glide.with(itemView.context)
+                    .load(item.images)
+                    .error(R.color.grey_error_placeholder)
+                    .into(productIV)*/
 
         }
     }

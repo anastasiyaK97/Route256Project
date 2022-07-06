@@ -2,6 +2,7 @@ package ru.ozon.route256.feature_products_impl.presentation.view_holders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import ru.ozon.route256.feature_products_impl.databinding.ProductListItemBinding
 import ru.ozon.route256.feature_products_impl.databinding.ProductsSectionItemBinding
 import ru.ozon.route256.feature_products_impl.presentation.view.list.ProductsAdapter.Companion.PRODUCT_VIEW_TYPE
@@ -13,7 +14,8 @@ object ViewHolderFactory {
         parent: ViewGroup,
         viewType: Int,
         clickAction: ProductClickAction,
-        addToCartAction: AddToCartAction
+        addToCartAction: AddToCartAction,
+        imagesRecyclerViewPool: RecyclerView.RecycledViewPool
     ): BaseListViewHolder<*> {
         return when (viewType) {
             PRODUCT_VIEW_TYPE -> ProductViewHolder(
@@ -21,7 +23,8 @@ object ViewHolderFactory {
                     LayoutInflater.from(parent.context), parent, false
                 ),
                 clickAction = clickAction,
-                addToCartAction = addToCartAction
+                addToCartAction = addToCartAction,
+                sharedViewPool = imagesRecyclerViewPool
             )
             SECTION_VIEW_TYPE -> SectionViewHolder(
                 binding = ProductsSectionItemBinding.inflate(
