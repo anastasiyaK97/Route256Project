@@ -63,11 +63,6 @@ class ProductViewHolder(
             updateButton(item.isLoading, item.isInCart)
 
             adapter.submitList(item.images)
-            /*Glide.with(itemView.context)
-                    .load(item.images)
-                    .error(R.color.grey_error_placeholder)
-                    .into(productIV)*/
-
         }
     }
 

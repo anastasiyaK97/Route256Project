@@ -12,4 +12,8 @@
     <color name="section_background">#5084D4DF</color>
     <color name="button_default">#12B052</color>
     <color name="button_done">#0351CE</color>
+
+    <color name="grey">#E7E7E7</color>
+    <color name="light_grey">#F7F7F7</color>
+    <color name="dark_text">#383838</color>
 </resources>

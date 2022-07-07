@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import ru.ozon.route256.feature_products_impl.R
+import ru.ozon.route256.core_utils.R as utils_R
 import ru.ozon.route256.feature_products_impl.databinding.ViewCartButtonBinding
 
 class CartButton @JvmOverloads constructor(
@@ -48,7 +49,7 @@ class CartButton @JvmOverloads constructor(
         @DrawableRes val backgroundRes: Int,
         @StringRes val text: Int
     ) {
-        DEFAULT(R.drawable.background_cart_button_default, ru.ozon.route256.core_utils.R.string.cart_title_default),
+        DEFAULT(utils_R.drawable.background_cart_button_default, utils_R.string.cart_title_default),
         DONE(R.drawable.background_cart_button_done, ru.ozon.route256.core_utils.R.string.cart_title_done)
     }
 }

@@ -18,6 +18,7 @@ import ru.ozon.route256.feature_pdp_impl.di.FeaturePDPComponent
 import ru.ozon.route256.feature_pdp_impl.domain.interactor.ProductInteractor
 import ru.ozon.route256.feature_pdp_impl.presentation.view_models.PDViewModel
 import ru.ozon.route256.feature_pdp_impl.domain.model.Product
+import ru.ozon.route256.feature_pdp_impl.presentation.model.ProductDetailModel
 import javax.inject.Inject
 
 class PDPFragment : Fragment() {
@@ -65,6 +66,11 @@ class PDPFragment : Fragment() {
             renderState(product)
         }
         viewModel.loadData()
+
+        binding.editCountButton.setupCartActions(
+            addAction = { newCount -> viewModel.addProductToCart(newCount) },
+            removeAction = { newCount ->viewModel.removeProductFromCart(newCount) }
+        )
     }
 
     override fun onPause() {
@@ -76,14 +82,17 @@ class PDPFragment : Fragment() {
         super.onPause()
     }
 
-    private fun renderState(product: Product) = with(binding) {
-        nameTV.text = product.name
-        descriptionTV.text = product.description
-        priceTV.text = product.price.withCurrency()
-        ratingView.rating = product.rating.toFloat()
+    private fun renderState(productModel: ProductDetailModel) = with(binding) {
+        nameTV.text = productModel.product.name
+        descriptionTV.text = productModel.product.description
+        priceTV.text = productModel.product.price.withCurrency()
+        ratingView.rating = productModel.product.rating.toFloat()
+
+        editCountButton.countInCart = productModel.countInCart
+        editCountButton.isLoading = productModel.isLoading
 
         Glide.with(requireContext())
-            .load(product.images.getOrElse(0) { "" })
+            .load(productModel.product.images.getOrElse(0) { "" })
             .error(ru.ozon.route256.core_utils.R.color.grey_error_placeholder)
             .into(productIV)
     }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@drawable/background_cart_button_default"
+    tools:layout_height="42dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <ImageView
+        android:id="@+id/addProductButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="10dp"
+        android:src="@drawable/icon_plus"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/removeProductButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="10dp"
+        android:src="@drawable/icon_minus"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/defaultButtonText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/cart_title_default"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/countText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/buttonText"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/removeProductButton"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/buttonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/global_things"
+        android:visibility="gone"
+        android:textColor="@color/dark_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dividerRight"
+        app:layout_constraintStart_toEndOf="@+id/countText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dividerLeft"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="4dp"
+        android:background="@color/grey"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/addProductButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dividerRight"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="4dp"
+        android:visibility="gone"
+        android:background="@color/grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/addProductButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/productCountGroup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="
+            addProductButton,
+             removeProductButton,
+             dividerLeft,
+             dividerRight" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/progressBar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@raw/progress"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</merge>

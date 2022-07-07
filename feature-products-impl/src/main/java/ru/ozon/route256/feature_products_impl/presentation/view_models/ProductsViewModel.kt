@@ -5,6 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
@@ -58,11 +59,10 @@ class ProductsViewModel @Inject constructor(
 
     fun addProductToCart(id: String) {
         updateProductState(id = id, isLoading = true)
-        compositeDisposable += Observable
-            .interval(5L, TimeUnit.SECONDS)
-            .subscribeOn(Schedulers.io())
+        compositeDisposable += Completable
+            .timer(1L, TimeUnit.SECONDS, Schedulers.io())
             .subscribeBy(
-                onNext = {
+                onComplete = {
                     updateProductState(id = id, isLoading = false, isInCart = true)
                 },
                 onError = {
