@@ -43,6 +43,7 @@ class CartButton @JvmOverloads constructor(
     private fun updateButtonState(state: CartButtonState) {
         binding.root.background = ContextCompat.getDrawable(context, state.backgroundRes)
         binding.buttonText.setText(state.text)
+        binding.root.isEnabled = state != CartButtonState.DONE
     }
 
     enum class CartButtonState(

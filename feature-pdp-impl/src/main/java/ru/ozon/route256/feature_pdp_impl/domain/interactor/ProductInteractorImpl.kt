@@ -11,4 +11,11 @@ class ProductInteractorImpl @Inject constructor(
     override fun getProductById(guid: String): Product? =
         repository.getProductById(guid)
 
+    override fun findInCart(guid: String): Int =
+        repository.findInCart(guid)
+
+    override fun addToCart(guid: String, count: Int) {
+        repository.addToCart(guid, count)
+    }
+
 }

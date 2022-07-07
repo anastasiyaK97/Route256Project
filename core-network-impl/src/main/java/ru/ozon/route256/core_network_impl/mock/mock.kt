@@ -3,6 +3,8 @@ package ru.ozon.route256.core_network_impl.mock
 import ru.ozon.route256.core_network_api.model.product.ProductDTO
 import ru.ozon.route256.core_network_api.model.product.ProductInListDTO
 
+val cart = hashMapOf<String, Int>()
+
 val productInListDTOs = mutableListOf(
     ProductInListDTO(
         guid = "b5f5852b-3b8c-4857-9f53-ac5c2b6a3b2f",

@@ -7,4 +7,6 @@ interface NetworkApi {
     fun getProductsApi(): ProductsApi
 
     fun getMoshi(): Moshi
+
+    fun getCart(): CartApi
 }

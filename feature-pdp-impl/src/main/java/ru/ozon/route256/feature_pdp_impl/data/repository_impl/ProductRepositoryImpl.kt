@@ -2,6 +2,7 @@ package ru.ozon.route256.feature_pdp_impl.data.repository_impl
 
 import android.content.SharedPreferences
 import com.squareup.moshi.Moshi
+import ru.ozon.route256.core_network_api.CartApi
 import ru.ozon.route256.core_network_api.model.product.ProductDTO
 import ru.ozon.route256.core_prefs.CacheKeys
 import ru.ozon.route256.core_prefs.di.ProductsDetailsPrefs
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
     @ProductsDetailsPrefs private val cache: SharedPreferences,
-    private val moshi: Moshi
+    private val moshi: Moshi,
+    private val cart: CartApi
 ) : ProductRepository {
 
     override fun getProductById(guid: String): Product? {
@@ -22,5 +24,11 @@ class ProductRepositoryImpl @Inject constructor(
 
         val list = moshi.getListAdapter<ProductDTO>().fromJson(json)
         return list?.firstOrNull { it.guid == guid }?.toProduct()
+    }
+
+    override fun findInCart(guid: String): Int = cart.findInCart(guid)
+
+    override fun addToCart(guid: String, count: Int) {
+        cart.addToCart(guid, count)
     }
 }

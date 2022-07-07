@@ -29,20 +29,25 @@ class PDViewModel @Inject constructor(
 
     fun loadData() {
         productId?.let { productId ->
+            val countInCart = interactor.findInCart(productId)
+
             interactor.getProductById(productId)?.let { product ->
                 _productLD.value = _productLD.value
-                    ?.copy(product = product)
-                    ?: ProductDetailModel(product = product)
+                    ?.copy(product = product, countInCart = countInCart)
+                    ?: ProductDetailModel(product = product, countInCart = countInCart)
             }
         }
     }
 
     fun addProductToCart(newCount: Int) {
         updateProductState(isLoading = true)
+
+        //Imitation of sending a network request for show loading
         compositeDisposable += Completable
             .timer(1L, TimeUnit.SECONDS, Schedulers.io())
             .subscribeBy(
                 onComplete = {
+                    productId?.let { interactor.addToCart(it, newCount) }
                     updateProductState(isLoading = false, countInCart = newCount)
                 },
                 onError = {
@@ -53,10 +58,13 @@ class PDViewModel @Inject constructor(
 
     fun removeProductFromCart(newCount: Int) {
         updateProductState(isLoading = true)
+
+        //Imitation of sending a network request for show loading
         compositeDisposable += Completable
             .timer(1L, TimeUnit.SECONDS, Schedulers.io())
             .subscribeBy(
                 onComplete = {
+                    productId?.let { interactor.addToCart(it, newCount) }
                     updateProductState(isLoading = false, countInCart = newCount)
                 },
                 onError = {

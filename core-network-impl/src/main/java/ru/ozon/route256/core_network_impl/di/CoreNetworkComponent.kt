@@ -5,5 +5,5 @@ import ru.ozon.route256.core_network_api.NetworkApi
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [CoreNetworkModule::class])
+@Component(modules = [CoreNetworkModule::class, CartModule::class])
 interface CoreNetworkComponent: NetworkApi

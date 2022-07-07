@@ -9,4 +9,6 @@ interface ProductsInteractor {
     fun planProductsRequest()
 
     fun increaseProductCounter(guid: String)
+
+    fun addToCart(guid: String, count: Int)
 }

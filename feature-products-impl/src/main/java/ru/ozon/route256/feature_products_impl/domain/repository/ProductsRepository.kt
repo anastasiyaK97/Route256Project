@@ -11,4 +11,6 @@ interface ProductsRepository {
     fun updateProductsInCache(productslist: List<ProductInListEntity>)
 
     fun requestProducts()
+
+    fun addToCart(guid: String, count: Int)
 }

@@ -26,4 +26,8 @@ class ProductsInteractorImpl @Inject constructor(
         repository.updateProductsInCache(products)
     }
 
+    override fun addToCart(guid: String, count: Int) {
+        repository.addToCart(guid, count)
+    }
+
 }

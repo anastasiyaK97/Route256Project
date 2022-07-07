@@ -59,10 +59,13 @@ class ProductsViewModel @Inject constructor(
 
     fun addProductToCart(id: String) {
         updateProductState(id = id, isLoading = true)
+
+        //Imitation of sending a network request for show loading
         compositeDisposable += Completable
             .timer(1L, TimeUnit.SECONDS, Schedulers.io())
             .subscribeBy(
                 onComplete = {
+                    interactor.addToCart(id, count = 1)
                     updateProductState(id = id, isLoading = false, isInCart = true)
                 },
                 onError = {
