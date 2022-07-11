@@ -1,7 +1,7 @@
 package ru.ozon.route256.feature_pdp_impl.domain.interactor
 
-import ru.ozon.route256.feature_pdp_impl.domain.repository.ProductRepository
 import ru.ozon.route256.feature_pdp_impl.domain.model.Product
+import ru.ozon.route256.feature_pdp_impl.domain.repository.ProductRepository
 import javax.inject.Inject
 
 class ProductInteractorImpl @Inject constructor(
@@ -17,5 +17,4 @@ class ProductInteractorImpl @Inject constructor(
     override fun addToCart(guid: String, count: Int) {
         repository.addToCart(guid, count)
     }
-
 }

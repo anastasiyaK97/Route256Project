@@ -10,7 +10,7 @@ import ru.ozon.route256.feature_products_impl.databinding.ImageHolderViewBinding
 
 class ImagesAdapter(
     private var images: List<String> = emptyList()
-): RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
+) : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
 
     companion object {
         const val IMAGE_VIEW_TYPE = 999
@@ -39,7 +39,7 @@ class ImagesAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ImageViewHolder(private val view: ImageView): RecyclerView.ViewHolder(view) {
+    inner class ImageViewHolder(private val view: ImageView) : RecyclerView.ViewHolder(view) {
         fun bind(image: String) {
             Glide.with(view.context)
                 .load(image)

@@ -2,7 +2,7 @@ package ru.ozon.route256.feature_products_impl.presentation.view_objects
 
 import androidx.annotation.StringRes
 
-sealed class ProductsListItem  {
+sealed class ProductsListItem {
 
     data class ProductInList(
         val guid: String,
@@ -14,8 +14,7 @@ sealed class ProductsListItem  {
         val isInCart: Boolean,
         val counter: Int,
         val isLoading: Boolean = false
-    ): ProductsListItem()
+    ) : ProductsListItem()
 
-    data class SectionListItem(@StringRes val titleRes: Int): ProductsListItem()
+    data class SectionListItem(@StringRes val titleRes: Int) : ProductsListItem()
 }
-

@@ -29,5 +29,4 @@ class ProductsInteractorImpl @Inject constructor(
     override fun addToCart(guid: String, count: Int) {
         repository.addToCart(guid, count)
     }
-
 }

@@ -52,7 +52,8 @@ class ProductsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_products, container, false)
 
@@ -97,5 +98,4 @@ class ProductsFragment : Fragment() {
     private fun addToCartAction(id: String) {
         viewModel.addProductToCart(id)
     }
-
 }

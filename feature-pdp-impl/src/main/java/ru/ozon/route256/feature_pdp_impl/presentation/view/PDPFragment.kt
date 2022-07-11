@@ -16,9 +16,8 @@ import ru.ozon.route256.feature_pdp_impl.R
 import ru.ozon.route256.feature_pdp_impl.databinding.PdpFragmentBinding
 import ru.ozon.route256.feature_pdp_impl.di.FeaturePDPComponent
 import ru.ozon.route256.feature_pdp_impl.domain.interactor.ProductInteractor
-import ru.ozon.route256.feature_pdp_impl.presentation.view_models.PDViewModel
-import ru.ozon.route256.feature_pdp_impl.domain.model.Product
 import ru.ozon.route256.feature_pdp_impl.presentation.model.ProductDetailModel
+import ru.ozon.route256.feature_pdp_impl.presentation.view_models.PDViewModel
 import javax.inject.Inject
 
 class PDPFragment : Fragment() {
@@ -69,12 +68,12 @@ class PDPFragment : Fragment() {
 
         binding.editCountButton.setupCartActions(
             addAction = { newCount -> viewModel.addProductToCart(newCount) },
-            removeAction = { newCount ->viewModel.removeProductFromCart(newCount) }
+            removeAction = { newCount -> viewModel.removeProductFromCart(newCount) }
         )
     }
 
     override fun onPause() {
-        if(isRemoving) {
+        if (isRemoving) {
             if (productNavigation.isFeatureProductDetailsClosed(this)) {
                 FeaturePDPComponent.resetComponent()
             }
@@ -96,5 +95,4 @@ class PDPFragment : Fragment() {
             .error(ru.ozon.route256.core_utils.R.color.grey_error_placeholder)
             .into(productIV)
     }
-
 }

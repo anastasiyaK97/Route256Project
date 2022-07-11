@@ -8,8 +8,8 @@ import ru.ozon.route256.core_prefs.CacheKeys
 import ru.ozon.route256.core_prefs.di.ProductsDetailsPrefs
 import ru.ozon.route256.core_utils.extensions.getListAdapter
 import ru.ozon.route256.feature_pdp_impl.data.mapper.toProduct
-import ru.ozon.route256.feature_pdp_impl.domain.repository.ProductRepository
 import ru.ozon.route256.feature_pdp_impl.domain.model.Product
+import ru.ozon.route256.feature_pdp_impl.domain.repository.ProductRepository
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(

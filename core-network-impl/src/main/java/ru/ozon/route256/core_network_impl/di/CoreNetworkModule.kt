@@ -8,11 +8,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import ru.ozon.route256.core_network_api.CartApi
 import ru.ozon.route256.core_network_api.ProductsApi
 import ru.ozon.route256.core_network_impl.BuildConfig
 import ru.ozon.route256.core_network_impl.interceptor.ExceptionsInterceptor
-import ru.ozon.route256.core_network_impl.mock.Cart
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 

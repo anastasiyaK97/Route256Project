@@ -42,7 +42,7 @@ class PDViewModel @Inject constructor(
     fun addProductToCart(newCount: Int) {
         updateProductState(isLoading = true)
 
-        //Imitation of sending a network request for show loading
+        // Imitation of sending a network request for show loading
         compositeDisposable += Completable
             .timer(1L, TimeUnit.SECONDS, Schedulers.io())
             .subscribeBy(
@@ -59,7 +59,7 @@ class PDViewModel @Inject constructor(
     fun removeProductFromCart(newCount: Int) {
         updateProductState(isLoading = true)
 
-        //Imitation of sending a network request for show loading
+        // Imitation of sending a network request for show loading
         compositeDisposable += Completable
             .timer(1L, TimeUnit.SECONDS, Schedulers.io())
             .subscribeBy(
@@ -78,5 +78,4 @@ class PDViewModel @Inject constructor(
         countInCart?.let { updatedProduct = updatedProduct.copy(countInCart = it) }
         _productLD.postValue(updatedProduct)
     }
-
 }

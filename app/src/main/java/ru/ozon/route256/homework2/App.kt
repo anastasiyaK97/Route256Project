@@ -8,7 +8,7 @@ import ru.ozon.route256.homework2.network_handler.ConnectivityEvent
 import ru.ozon.route256.homework2.network_handler.ConnectivityHandler
 import javax.inject.Inject
 
-class App: Application() {
+class App : Application() {
 
     lateinit var appComponent: ApplicationComponent
 
@@ -35,7 +35,7 @@ class App: Application() {
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
     }
 
-    private val networkCallback = object: ConnectivityManager.NetworkCallback() {
+    private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
             connectivityHandler.onConnectivityEvent(ConnectivityEvent.AVAILABLE)
         }
@@ -44,5 +44,4 @@ class App: Application() {
             connectivityHandler.onConnectivityEvent(ConnectivityEvent.LOST)
         }
     }
-
 }

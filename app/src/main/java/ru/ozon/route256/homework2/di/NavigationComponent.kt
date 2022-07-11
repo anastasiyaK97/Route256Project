@@ -6,4 +6,4 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [NavigationModule::class])
-interface NavigationComponent: NavigationApi
+interface NavigationComponent : NavigationApi

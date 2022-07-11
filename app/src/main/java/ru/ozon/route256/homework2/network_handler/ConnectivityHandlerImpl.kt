@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ConnectivityHandlerImpl @Inject constructor(): ConnectivityHandler {
+class ConnectivityHandlerImpl @Inject constructor() : ConnectivityHandler {
 
     private val _events = MutableSharedFlow<ConnectivityEvent>(
         extraBufferCapacity = 1,

@@ -82,5 +82,4 @@ class EditProductCountButton @JvmOverloads constructor(
         }
         setBackgroundResource(backgroundRes)
     }
-
 }

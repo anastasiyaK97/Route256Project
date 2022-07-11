@@ -60,7 +60,7 @@ class ProductsViewModel @Inject constructor(
     fun addProductToCart(id: String) {
         updateProductState(id = id, isLoading = true)
 
-        //Imitation of sending a network request for show loading
+        // Imitation of sending a network request for show loading
         compositeDisposable += Completable
             .timer(1L, TimeUnit.SECONDS, Schedulers.io())
             .subscribeBy(
@@ -82,7 +82,7 @@ class ProductsViewModel @Inject constructor(
         _productLD.value?.let { items ->
             val product = items
                 .find { it is ProductsListItem.ProductInList && it.guid == id }
-                    as? ProductsListItem.ProductInList
+                as? ProductsListItem.ProductInList
                 ?: return
             _productLD.postValue(
                 items.toMutableList()
@@ -93,5 +93,4 @@ class ProductsViewModel @Inject constructor(
             )
         }
     }
-
 }

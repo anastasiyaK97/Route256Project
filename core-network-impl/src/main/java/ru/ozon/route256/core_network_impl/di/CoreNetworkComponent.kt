@@ -6,4 +6,4 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [CoreNetworkModule::class, CartModule::class])
-interface CoreNetworkComponent: NetworkApi
+interface CoreNetworkComponent : NetworkApi

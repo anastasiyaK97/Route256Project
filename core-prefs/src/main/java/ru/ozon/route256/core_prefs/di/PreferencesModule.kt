@@ -20,5 +20,4 @@ class PreferencesModule {
     @Singleton
     fun provideProductDetailsSharedPreferences(context: Context): SharedPreferences =
         context.getSharedPreferences("PRODUCTS_DETAILED_DATA", Context.MODE_MULTI_PROCESS)
-
 }

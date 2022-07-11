@@ -12,7 +12,7 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideWorkManager(context: Context): WorkManager = 
+    fun provideWorkManager(context: Context): WorkManager =
         WorkManager.getInstance(context)
 
     @Singleton

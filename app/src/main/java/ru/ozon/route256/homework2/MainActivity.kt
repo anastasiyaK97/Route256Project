@@ -6,13 +6,13 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
 import ru.ozon.route256.core_navigation_impl.R
-import ru.ozon.route256.core_utils.R as core_R
 import ru.ozon.route256.feature_products_impl.presentation.view.ProductsFragment
 import ru.ozon.route256.homework2.di.ApplicationComponent
 import ru.ozon.route256.homework2.di.FeatureInjectorProxy
 import ru.ozon.route256.homework2.network_handler.ConnectivityEvent
 import ru.ozon.route256.homework2.network_handler.ConnectivityHandler
 import javax.inject.Inject
+import ru.ozon.route256.core_utils.R as core_R
 
 class MainActivity : AppCompatActivity() {
 

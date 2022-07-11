@@ -51,11 +51,13 @@ interface FeatureProductsComponent {
     fun inject(worker: GetDetailedProductsWorker)
 
     @FeatureScope
-    @Component(dependencies = [
-        NetworkApi::class,
-        ProductsNavigationApi::class,
-        PreferencesApi::class,
-        WorkManagerDeps::class
-    ])
+    @Component(
+        dependencies = [
+            NetworkApi::class,
+            ProductsNavigationApi::class,
+            PreferencesApi::class,
+            WorkManagerDeps::class
+        ]
+    )
     interface FeatureProductsDependenciesComponent : FeatureProductsDependencies
 }

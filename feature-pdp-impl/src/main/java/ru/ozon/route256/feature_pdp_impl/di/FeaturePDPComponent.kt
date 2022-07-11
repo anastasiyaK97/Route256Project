@@ -40,16 +40,17 @@ interface FeaturePDPComponent {
         fun resetComponent() {
             featurePDPComponent = null
         }
-
     }
 
     fun inject(fragment: PDPFragment)
 
     @FeatureScope
-    @Component(dependencies = [
-        NetworkApi::class,
-        PDPNavigationApi::class,
-        PreferencesApi::class
-    ])
+    @Component(
+        dependencies = [
+            NetworkApi::class,
+            PDPNavigationApi::class,
+            PreferencesApi::class
+        ]
+    )
     interface FeatureProductDependenciesComponent : FeatureProductDependencies
 }

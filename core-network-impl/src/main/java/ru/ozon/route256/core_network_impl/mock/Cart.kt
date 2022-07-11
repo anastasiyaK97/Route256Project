@@ -5,11 +5,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Cart @Inject constructor(): CartApi {
+class Cart @Inject constructor() : CartApi {
 
     override fun addToCart(guid: String, count: Int) {
         cart.put(guid, count)
-        val test = 1
     }
 
     override fun findInCart(guid: String): Int =

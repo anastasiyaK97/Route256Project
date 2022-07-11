@@ -14,7 +14,6 @@ abstract class BaseListViewHolder<T>(
         (item as? T)?.let {
             bindItem(it, payloads)
         }
-
     }
 
     protected abstract fun bindItem(item: T, payloads: MutableList<Any>?)

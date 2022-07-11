@@ -61,10 +61,10 @@ class ProductsRepositoryImpl @Inject constructor(
         val products = getProductsFromCache()
         val productToUpdate = products.first { it.guid == guid }
         val updatedProducts = (products as MutableList<ProductInListEntity>)
-            .replace(oldItem = productToUpdate,
+            .replace(
+                oldItem = productToUpdate,
                 newItem = productToUpdate.copy(isInCart = count > 0)
             )
         updateProductsInCache(updatedProducts)
     }
-
 }

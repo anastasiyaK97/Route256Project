@@ -46,5 +46,4 @@ class GetProductsWorker(
             }
             .onErrorReturn { Result.failure() }
     }
-
 }

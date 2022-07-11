@@ -9,8 +9,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import ru.ozon.route256.feature_products_impl.R
-import ru.ozon.route256.core_utils.R as utils_R
 import ru.ozon.route256.feature_products_impl.databinding.ViewCartButtonBinding
+import ru.ozon.route256.core_utils.R as utils_R
 
 class CartButton @JvmOverloads constructor(
     context: Context,
