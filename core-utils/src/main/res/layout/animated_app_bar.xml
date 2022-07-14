@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/pinned"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            app:layout_collapseMode="pin">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/account_image"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="12dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/icon_account_circle"
+                    app:layout_collapseMode="pin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/share_image"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="12dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/icon_share"
+                    app:layout_collapseMode="pin"
+                    app:layout_constraintEnd_toStartOf="@+id/account_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginEnd="16dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/title_text"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/top_bar_title_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_gravity="top"
+            tools:text="@string/catalog_title"/>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_input"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="top"
+            android:layout_marginTop="52dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/search_background"
+            app:queryHint="@string/search_hint"
+            app:searchIcon="@drawable/icon_search"
+            tools:visibility="visible" />
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+</merge>

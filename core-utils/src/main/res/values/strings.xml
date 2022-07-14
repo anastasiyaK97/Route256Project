@@ -7,4 +7,7 @@
     <string name="expensive_products_title">Дороже 100 рублей</string>
     <string name="cart_title_default">В корзину</string>
     <string name="cart_title_done">Добавлено</string>
+
+    <string name="catalog_title">Каталог</string>
+    <string name="search_hint">Искать...</string>
 </resources>

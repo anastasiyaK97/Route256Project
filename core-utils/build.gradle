@@ -11,6 +11,7 @@ apply from: "../androidConfig.gradle"
 
 dependencies {
     implementation fragment
+    implementation material
 
     implementation coreKtx
     implementation appCompat

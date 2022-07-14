@@ -2,11 +2,9 @@ package ru.ozon.route256.feature_products_impl.presentation.view
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.work.WorkManager
+import ru.ozon.route256.core_utils.top_bar.BaseTopBarFragment
 import ru.ozon.route256.core_utils.view.viewBinding
 import ru.ozon.route256.core_utils.view_models.viewModelCreator
 import ru.ozon.route256.feature_products_api.navigation.ProductsNavigationApi
@@ -19,7 +17,9 @@ import ru.ozon.route256.feature_products_impl.presentation.view.list.ProductsAda
 import ru.ozon.route256.feature_products_impl.presentation.view_models.ProductsViewModel
 import javax.inject.Inject
 
-class ProductsFragment : Fragment() {
+class ProductsFragment : BaseTopBarFragment(
+    layout = R.layout.fragment_products
+) {
 
     companion object {
         const val TAG = "ProductsFragment"
@@ -36,7 +36,9 @@ class ProductsFragment : Fragment() {
     @Inject
     lateinit var workManager: WorkManager
 
-    private val binding: FragmentProductsBinding by viewBinding(FragmentProductsBinding::bind)
+    private val binding: FragmentProductsBinding by viewBinding {
+        FragmentProductsBinding.bind(currentFragment)
+    }
     private val viewModel: ProductsViewModel by viewModelCreator {
         ProductsViewModel(interactor)
     }
@@ -51,14 +53,13 @@ class ProductsFragment : Fragment() {
         FeatureProductsComponent.featureProductComponent?.inject(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_products, container, false)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        animatedTopBar?.init(
+            title = requireContext().getString(ru.ozon.route256.core_utils.R.string.catalog_title),
+            isSearchInputVisible = true
+        )
 
         binding.list.adapter = recyclerAdapter
         viewModel.productLD.observe(viewLifecycleOwner) { recyclerAdapter.submitList(it) }
