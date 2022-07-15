@@ -19,7 +19,10 @@ class AnimatedTopBar @JvmOverloads constructor(
     companion object {
         private const val START_ANIMATE_OFFSET = 0F
         private const val SEARCH_HORIZONTAL_MARGIN_DP = 16
-        private const val COLLAPSED_SEARCH_END_MARGIN_DP = 98
+        private const val COLLAPSED_SEARCH_END_MARGIN_DP = 68
+
+        private const val EXPAND_ICON_SIZE_DP = 32
+        private const val VERTICAL_ICON_OFFSET_DP = 12
     }
 
     private val binding = AnimatedAppBarBinding.inflate(LayoutInflater.from(context), this)
@@ -50,6 +53,7 @@ class AnimatedTopBar @JvmOverloads constructor(
     private fun updateViews(offset: Float) {
         if (binding.searchInput.isVisible) {
             animateTitle(offset)
+            animateIcon(offset)
             animateSearchInput(offset)
         }
     }
@@ -66,7 +70,7 @@ class AnimatedTopBar @JvmOverloads constructor(
             when {
                 offset > START_ANIMATE_OFFSET -> {
                     val marginEnd = SEARCH_HORIZONTAL_MARGIN_DP.px -
-                            (SEARCH_HORIZONTAL_MARGIN_DP.px * 2 - COLLAPSED_SEARCH_END_MARGIN_DP.px) * offset
+                        (SEARCH_HORIZONTAL_MARGIN_DP.px * 2 - COLLAPSED_SEARCH_END_MARGIN_DP.px) * offset
                     val newWidth = expandedSearchWidthPx - marginEnd
                     updateLayoutParams<ViewGroup.LayoutParams> { width = Math.round(newWidth) }
                 }
@@ -77,4 +81,27 @@ class AnimatedTopBar @JvmOverloads constructor(
         }
     }
 
+    private fun animateIcon(offset: Float) {
+        binding.shareImage.apply {
+            when {
+                offset > START_ANIMATE_OFFSET -> {
+                    val iconSize = EXPAND_ICON_SIZE_DP.px - (EXPAND_ICON_SIZE_DP.px) * offset
+                    updateLayoutParams<ViewGroup.LayoutParams> {
+                        width = Math.round(iconSize)
+                        height = Math.round(iconSize)
+                    }
+                    translationY = ((binding.pinned.height - VERTICAL_ICON_OFFSET_DP.px - iconSize) / 2) * offset
+                    alpha = 1 - offset
+                }
+                else -> if (width < EXPAND_ICON_SIZE_DP.px) {
+                    updateLayoutParams<ViewGroup.LayoutParams> {
+                        width = EXPAND_ICON_SIZE_DP.px
+                        height = EXPAND_ICON_SIZE_DP.px
+                    }
+                    translationY = 0F
+                    alpha = 1F
+                }
+            }
+        }
+    }
 }

@@ -11,7 +11,7 @@ import ru.ozon.route256.core_utils.R
 
 abstract class BaseTopBarFragment(
     @LayoutRes private val layout: Int
-): Fragment() {
+) : Fragment() {
 
     private var _currentFragment: View? = null
     protected val currentFragment: View
@@ -29,5 +29,4 @@ abstract class BaseTopBarFragment(
 
         return parentView
     }
-
 }
