@@ -1,6 +1,6 @@
 ext {
     general = [
-            applicationId: "ru.ozon.route256.homework2"
+            applicationId: "ru.ozon.route256.my_project"
     ]
 
     versions = [
